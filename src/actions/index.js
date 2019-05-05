@@ -1,5 +1,6 @@
 export {
     initStr,
     correctType,
-    wrongType 
+    wrongType,
+    displayNext
 } from './typing';

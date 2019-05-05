@@ -1,14 +1,21 @@
 import React from 'react';
-import Typing from './containers/Typing/Typing';
 import classes from './App.css';
+import Content from './components/Content/Content'
 
 function App() {
   return (
     <div className={classes.App}>
-      <header className="App-header">
-      </header>
-      <div className={classes.Container}>
-      < Typing />
+      <div className={classes.Wrapper}>
+        <header className={classes.Header}>
+          <div className={classes.LeftMenu}>HEADER</div>
+          <a href="#">ランキング</a>
+          <a href="#">ダミー</a>
+          <a href="#">ログイン</a>
+        </header>
+        <div className={classes.Content}>
+          <Content />
+        </div>
+        <header className={classes.Footer}>FOOTER</header>
       </div>
     </div>
   );

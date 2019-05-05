@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TypingChar from './TypingChar';
+import TypingChar from '../../components/TypingChar/TypingChar';
 import { connect } from 'react-redux';
 
 
@@ -10,7 +10,6 @@ class TypingString extends Component {
         }
 
         render (){
-                console.log("currentPos: " + this.props.currentPos)
                 return [].map.call(this.props.str, (char, index) => (
                         <TypingChar char={char} index={index} key={index} 
                         isOpaque={this.isOpaque(index)}/>)
@@ -19,7 +18,9 @@ class TypingString extends Component {
 }
 
 const mapStateToProps = state => {
-    return { currentPos: state.typing.currentPos }
+    return { 
+            currentPos: state.typing.currentPos 
+        }
 }
 
 export default connect(mapStateToProps)(TypingString);

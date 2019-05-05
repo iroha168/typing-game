@@ -1,13 +1,44 @@
-* {
-  margin:0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 .App {
 }
-.Container {
+.Wrapper {
   max-width: 1140px;
   margin: 0 auto;
-  background-color: aqua;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 5% 90% 5%;
+}
+
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: beige;
+}
+
+.Header a {
+  padding: 8px 0;
+  text-decoration: none;
+  margin: 0px 10px;
+  border: 0;
+  height: 80%;
+  transition: border-bottom 0.2s;
+}
+
+.Header a:active,
+.Header a:hover {
+  border-bottom: 1px solid #e67e22;;
+}
+
+.Header .LeftMenu {
+  margin-right: auto; 
+  padding-left:0px;
+}
+
+.Footer {
+  background-color: bisque;
+}
+
+.Content{
+ /* background-color: lime; */
 }

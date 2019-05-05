@@ -3,10 +3,12 @@ import EventListener from 'react-event-listener';
 import { connect } from 'react-redux';
 import TypingString from '../TypingString/TypingString';
 import * as actions from '../../actions/index';
+import { withRouter } from 'react-router-dom';
+
 
 class Typing extends Component {
     componentDidMount() {
-        this.props.initStr("random string here!!");
+        this.props.initStr(["random", "stringaaa", "here"]);
     }
 
     isCorrect = (inputChar) => {
@@ -15,11 +17,21 @@ class Typing extends Component {
 
     onKeyDown = ( event ) => {
         const inputChar = String.fromCharCode(event.keyCode)
-        if(this.isCorrect(inputChar))
+
+        if(this.isCorrect(inputChar)){
             this.props.correctType();
+        }
         else
             this.props.wrongType();
-        console.log(inputChar)
+        console.log("currentPos: " + this.props.currentPos)
+        console.log("lastPos: " + this.props.lastPos)
+        if(this.props.currentPos === this.props.lastPos){
+            if(this.props.currentWord !== this.props.lastWord)
+                this.props.displayNext();
+            else
+                this.props.history.push('/result');
+                
+        }
     }
 
     render(){
@@ -35,7 +47,10 @@ class Typing extends Component {
 const mapStateToProps = state =>{
     return {
         str: state.typing.str,
-        currentPos: state.typing.currentPos
+        currentPos: state.typing.currentPos,
+        lastPos: state.typing.lastPos,
+        currentWord: state.typing.currentWord,
+        lastWord: state.typing.lastWord
     }
 }
 
@@ -43,8 +58,9 @@ const mapDispatchToProps = dispatch => {
     return {
         initStr: (str) => dispatch(actions.initStr(str)),
         correctType: (keyCode) => dispatch(actions.correctType(keyCode)),
-        wrongType: (keyCode) => dispatch(actions.wrongType(keyCode))
+        wrongType: (keyCode) => dispatch(actions.wrongType(keyCode)),
+        displayNext: () => dispatch(actions.displayNext())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Typing);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Typing));
